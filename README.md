@@ -16,7 +16,11 @@ The application also includes separate Faculty Member Comments and Student Comme
 
 | File | Purpose |
 |---|---|
-| `academic_integrity_app.py` | Main Tkinter application and Firestore save logic. |
+| `academic_integrity_app.py` | Small application entry point and save orchestration. |
+| `app_config.py` | Application paths, colors, and form field definitions. |
+| `firebase_service.py` | Firebase Admin SDK and Firestore connection setup. |
+| `form_view.py` | Tkinter form layout, widgets, and form value handling. |
+| `record_manager.py` | Firestore record search, display, modification, and deletion. |
 | `requirements.txt` | Python package dependency list. |
 | `firebase-service-account.json` | Private Firebase Admin SDK credential. Never publish or share this file. |
 | `Campus_Case_Report_Form_May_202047195.pdf` | Original PDF reference for the form design and wording. |
@@ -71,6 +75,11 @@ In VS Code, use **Run Python File**. Do not select one line and use **Run Code**
 6. The app validates that a student name was entered.
 7. The app creates an automatic Firestore document ID.
 8. The complete form is saved in the Firebase `cases` collection.
+9. To retrieve records, enter a record ID, student name, student number, or faculty name in **Find Existing Records**, then click **Search**. Use **Show All** to display every case.
+10. Select a result and click **Modify Selected** (or double-click it) to load it into the form. Click **Save Form** to update the selected Firestore document.
+11. Select a result and click **Delete Selected**, then confirm the deletion.
+
+New records use the last four digits of the student number, such as `TRU-2418`. If that ID already exists, a unique suffix is added, such as `TRU-2418-2`. Older records receive this format the first time they are retrieved. The original Firestore document ID is preserved internally so existing records remain editable and deletable. Click **Find / Manage Records** to show or hide the record search area.
 
 Each Firestore document has this general structure:
 
